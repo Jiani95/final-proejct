@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jiani's Playground</title>
+  <link rel="icon" href="images/Website Icon.png" type="image/png">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body class="home-page">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <nav class="navbar" aria-label="Primary navigation">
+    <a href="index.html" class="logo" aria-label="Go to home page">
+      <img src="images/Website Icon.png" alt="" class="logo-icon" width="36" height="36" decoding="async" />
+    </a>
+
+    <ul class="nav-links">
+        <li><a href="about.html">About</a></li>
+        <li><a href="kittens.html">Kittens</a></li>
+        <li><a href="Guestbook.html">Guestbook</a></li>
+    </ul>
+  </nav>
+
+  <main id="main-content">
+    <h1 class="hero-title">Hi there, I'm Jiani</h1>
+    <p class="hero-title-2">Welcome to my little world.</p>
+    <p class="welcome-text">A little space for sharing, connection, and joy</p>
+    <div
+      id="click-prompt"
+      class="click-prompt"
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+    ></div>
+  </main>
+
+  <footer class="footer-block">
+    <p class="home-hint">Hint: click anywhere on the background for a tiny sweet message.</p>
+    <div class="keyboard-message-panel">
+      <a class="skip-link skip-link--message-control" href="#random-message-btn">
+        Show happy message control
+      </a>
+      <p class="home-message-actions">
+        <button type="button" class="home-message-btn" id="random-message-btn">
+          Show a happy message
+        </button>
+      </p>
+    </div>
+    <p class="site-copyright">© 2026 Jiani Huang</p>
+  </footer>
+
+  <script>
+    const prompts = [
+      "Boop. You found a tiny happy thought.",
+      "A small hello from this cozy little page.",
+      "You clicked, and the flowers got excited.",
+      "Sending you one pocket-sized smile.",
+      "A gentle reminder: you are very easy to cheer for.",
+      "This page is quietly rooting for you."
+    ];
+
+    const clickPrompt = document.getElementById("click-prompt");
+    const randomMessageBtn = document.getElementById("random-message-btn");
+    let hideTimer;
+
+    function showRandomMessage(position) {
+      const randomText = prompts[Math.floor(Math.random() * prompts.length)];
+      clickPrompt.textContent = randomText;
+
+      if (position === "anchored") {
+        clickPrompt.classList.add("click-prompt--anchored");
+        clickPrompt.style.left = "";
+        clickPrompt.style.top = "";
+      } else {
+        clickPrompt.classList.remove("click-prompt--anchored");
+        const offset = 14;
+        clickPrompt.style.left = position.x + offset + "px";
+        clickPrompt.style.top = position.y + offset + "px";
+      }
+
+      clickPrompt.classList.add("show");
+
+      clearTimeout(hideTimer);
+      hideTimer = setTimeout(() => {
+        clickPrompt.classList.remove("show");
+      }, 1800);
+    }
+
+    document.body.addEventListener("click", (event) => {
+      if (event.target.closest("a, button")) return;
+
+      showRandomMessage({ x: event.clientX, y: event.clientY });
+    });
+
+    randomMessageBtn.addEventListener("click", () => {
+      showRandomMessage("anchored");
+    });
+  </script>
+</body>
+</html>
