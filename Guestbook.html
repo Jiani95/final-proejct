@@ -28,21 +28,22 @@
       <img src="images/guestbook.png" alt="" class="guestbook-title-icon" width="62" height="62" decoding="async" />
       <h1 id="guestbook-page-heading" class="guestbook-title">Guestbook</h1>
     </div>
+    <p id="guestbook-help" class="guestbook-help">Please fill out this form to leave a note for us.</p>
 
-    <form class="guestbook-form" aria-labelledby="guestbook-page-heading">
-      <label for="name">Name</label>
-      <input id="name" name="name" type="text" autocomplete="name" />
+    <form class="guestbook-form" aria-labelledby="guestbook-page-heading" aria-describedby="guestbook-help">
+      <label for="name">Name <span aria-hidden="true">*</span></label>
+      <input id="name" name="name" type="text" autocomplete="name" required />
 
       <label for="visit-day">Visit day</label>
       <input id="visit-day" name="visit-day" type="date" autocomplete="off" />
 
-      <label for="thoughts">Thoughts</label>
-      <textarea id="thoughts" name="thoughts" rows="4" autocomplete="off"></textarea>
+      <label for="thoughts">Thoughts <span aria-hidden="true">*</span></label>
+      <textarea id="thoughts" name="thoughts" rows="4" required></textarea>
 
       <fieldset class="guestbook-gift-fieldset">
         <legend class="gift-question">Send greetings to cats?</legend>
-        <label><input type="radio" name="gift" value="yes" /> Yes</label>
-        <label><input type="radio" name="gift" value="no" /> No</label>
+        <label for="gift-yes"><input id="gift-yes" type="radio" name="gift" value="yes" /> Yes</label>
+        <label for="gift-no"><input id="gift-no" type="radio" name="gift" value="no" /> No</label>
       </fieldset>
 
       <button type="submit">Submit</button>
